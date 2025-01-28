@@ -10,7 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Table(
-        name = "customers"
+        name = "customers",
+        uniqueConstraints = @UniqueConstraint(
+                name = "email_unique",
+                columnNames = "email_address"
+        )
 )
 public class Customer {
     @Id
@@ -26,5 +30,9 @@ public class Customer {
     private Long id;
     private String name;
     private String lastName;
+    @Column(
+            name = "email_address",
+            nullable = false
+    )
     private String email;
 }
