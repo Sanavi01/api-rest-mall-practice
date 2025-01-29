@@ -2,6 +2,7 @@ package com.savisoft.apirest_mall_practice.repository;
 
 import com.savisoft.apirest_mall_practice.Entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,5 +15,15 @@ public interface CustomerRepository  extends JpaRepository<Customer,Long> {
     List<Customer> findByNameContaining(String name); //Trae todos los objetos cuyo nombre tengan los caracteres llevados en el String name
     List<Customer> findByLastNameNotNull(); //Trae todos los registros que no tengan null en lastName
     //Todas estos metodos custom se pueden sacar de la documentacion de SpringBoot "Query Methods", expecificamente query creation
+
+
+    //--------custom methods with JPQL examples
+
+    @Query("select c from Customer c where c.email = ?1")
+    Customer getCustomerByEmailAddress(String email);
+
+    @Query("select c.name from Customer c where c.email = ?1")
+    Customer getCustomerFirstNameByEmailAddress(String email);
+
 
 }
