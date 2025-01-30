@@ -2,6 +2,7 @@ package com.savisoft.apirest_mall_practice.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Local {
 
     @Id
@@ -25,7 +27,9 @@ public class Local {
     private String name;
     private String floor;
 
-    @OneToOne
+    @OneToOne(
+            cascade = CascadeType.PERSIST
+    )
     @JoinColumn(
             name = "manager_id",
             referencedColumnName = "managerId"
